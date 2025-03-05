@@ -1,0 +1,122 @@
+[2025-03-05T02:21:33.305+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-03-05T02:21:33.329+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: extract_stock_data.load_to_snowflake manual__2025-03-05T02:21:02.628127+00:00 [queued]>
+[2025-03-05T02:21:33.339+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: extract_stock_data.load_to_snowflake manual__2025-03-05T02:21:02.628127+00:00 [queued]>
+[2025-03-05T02:21:33.340+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-03-05T02:21:33.357+0000] {taskinstance.py:2888} INFO - Executing <Task(_PythonDecoratedOperator): load_to_snowflake> on 2025-03-05 02:21:02.628127+00:00
+[2025-03-05T02:21:33.381+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=810) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-03-05T02:21:33.384+0000] {standard_task_runner.py:72} INFO - Started process 813 to run task
+[2025-03-05T02:21:33.380+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'extract_stock_data', 'load_to_snowflake', 'manual__2025-03-05T02:21:02.628127+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/extract_stock_data.py', '--cfg-path', '/tmp/tmp1e9hbcoe']
+[2025-03-05T02:21:33.385+0000] {standard_task_runner.py:105} INFO - Job 16: Subtask load_to_snowflake
+[2025-03-05T02:21:33.491+0000] {task_command.py:467} INFO - Running <TaskInstance: extract_stock_data.load_to_snowflake manual__2025-03-05T02:21:02.628127+00:00 [running]> on host 53b5cd688e7b
+[2025-03-05T02:21:33.691+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='extract_stock_data' AIRFLOW_CTX_TASK_ID='load_to_snowflake' AIRFLOW_CTX_EXECUTION_DATE='2025-03-05T02:21:02.628127+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-03-05T02:21:02.628127+00:00'
+[2025-03-05T02:21:33.693+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-03-05T02:21:33.727+0000] {base.py:84} INFO - Retrieving connection 'snowflake_conn'
+[2025-03-05T02:21:33.747+0000] {connection.py:413} INFO - Snowflake Connector for Python Version: 3.12.1, Python Version: 3.12.5, Platform: Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36
+[2025-03-05T02:21:33.760+0000] {connection.py:1196} INFO - Connecting to GLOBAL Snowflake domain
+[2025-03-05T02:21:33.766+0000] {connection.py:1277} INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+[2025-03-05T02:21:35.609+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-03-05T02:21:35.899+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-03-05T02:21:35.900+0000] {logging_mixin.py:190} INFO - Error loading data to Snowflake: name 'STAGE_NAME' is not defined
+[2025-03-05T02:21:35.903+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/decorators/base.py", line 266, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/extract_stock_data.py", line 56, in load_to_snowflake
+    DELETE FROM {SNOWFLAKE_TABLE} WHERE DATE >= (SELECT MIN(DATE) FROM @{STAGE_NAME}/stock_data.csv);
+                                                                         ^^^^^^^^^^
+NameError: name 'STAGE_NAME' is not defined
+[2025-03-05T02:21:36.010+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=extract_stock_data, task_id=load_to_snowflake, run_id=manual__2025-03-05T02:21:02.628127+00:00, execution_date=20250305T022102, start_date=20250305T022133, end_date=20250305T022136
+[2025-03-05T02:21:36.050+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-03-05T02:21:36.052+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 16 for task load_to_snowflake (name 'STAGE_NAME' is not defined; 813)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/decorators/base.py", line 266, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/extract_stock_data.py", line 56, in load_to_snowflake
+    DELETE FROM {SNOWFLAKE_TABLE} WHERE DATE >= (SELECT MIN(DATE) FROM @{STAGE_NAME}/stock_data.csv);
+                                                                         ^^^^^^^^^^
+NameError: name 'STAGE_NAME' is not defined
+[2025-03-05T02:21:36.133+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-03-05T02:21:36.156+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-03-05T02:21:36.159+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

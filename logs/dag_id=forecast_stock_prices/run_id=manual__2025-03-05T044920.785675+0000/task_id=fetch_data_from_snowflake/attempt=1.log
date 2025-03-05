@@ -1,0 +1,51 @@
+[2025-03-05T04:49:34.875+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-03-05T04:49:34.897+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: forecast_stock_prices.fetch_data_from_snowflake manual__2025-03-05T04:49:20.785675+00:00 [queued]>
+[2025-03-05T04:49:34.916+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: forecast_stock_prices.fetch_data_from_snowflake manual__2025-03-05T04:49:20.785675+00:00 [queued]>
+[2025-03-05T04:49:34.918+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-03-05T04:49:34.940+0000] {taskinstance.py:2888} INFO - Executing <Task(_PythonDecoratedOperator): fetch_data_from_snowflake> on 2025-03-05 04:49:20.785675+00:00
+[2025-03-05T04:49:34.987+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=773) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-03-05T04:49:34.984+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'forecast_stock_prices', 'fetch_data_from_snowflake', 'manual__2025-03-05T04:49:20.785675+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/forecast_stock_prices.py', '--cfg-path', '/tmp/tmp7z5b331o']
+[2025-03-05T04:49:34.989+0000] {standard_task_runner.py:72} INFO - Started process 789 to run task
+[2025-03-05T04:49:34.990+0000] {standard_task_runner.py:105} INFO - Job 12: Subtask fetch_data_from_snowflake
+[2025-03-05T04:49:35.105+0000] {task_command.py:467} INFO - Running <TaskInstance: forecast_stock_prices.fetch_data_from_snowflake manual__2025-03-05T04:49:20.785675+00:00 [running]> on host 0d515916445a
+[2025-03-05T04:49:35.263+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='forecast_stock_prices' AIRFLOW_CTX_TASK_ID='fetch_data_from_snowflake' AIRFLOW_CTX_EXECUTION_DATE='2025-03-05T04:49:20.785675+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-03-05T04:49:20.785675+00:00'
+[2025-03-05T04:49:35.266+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-03-05T04:49:35.303+0000] {base.py:84} INFO - Retrieving connection 'snowflake_conn'
+[2025-03-05T04:49:35.307+0000] {connection.py:413} INFO - Snowflake Connector for Python Version: 3.12.1, Python Version: 3.12.5, Platform: Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36
+[2025-03-05T04:49:35.310+0000] {connection.py:1196} INFO - Connecting to GLOBAL Snowflake domain
+[2025-03-05T04:49:35.312+0000] {connection.py:1277} INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+[2025-03-05T04:49:53.632+0000] {connectionpool.py:824} WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLError("bad handshake: SysCallError(-1, 'Unexpected EOF')"))': /session/v1/login-request?request_id=e8039291-92ed-4243-a73e-0756342af03e&databaseName=DEV&schemaName=&warehouse=compute_wh&roleName=ACCOUNTADMIN&request_guid=40d3159f-e634-4de9-8f15-f25723f14607
+[2025-03-05T04:49:54.465+0000] {cursor.py:1156} INFO - Number of results in first chunk: 122
+[2025-03-05T04:49:54.646+0000] {cursor.py:1156} INFO - Number of results in first chunk: 122
+[2025-03-05T04:49:54.649+0000] {python.py:240} INFO - Done. Returned value was: {'AAPL':           date       close
+0   2024-09-06  220.335083
+1   2024-09-09  220.424866
+2   2024-09-10  219.626633
+3   2024-09-11  222.171021
+4   2024-09-12  222.280777
+..         ...         ...
+117 2025-02-26  240.360001
+118 2025-02-27  237.300003
+119 2025-02-28  241.839996
+120 2025-03-03  238.029999
+121 2025-03-04  235.929993
+
+[122 rows x 2 columns], 'NVDA':           date       close
+0   2024-09-06  102.814117
+1   2024-09-09  106.453552
+2   2024-09-10  108.083305
+3   2024-09-11  116.891945
+4   2024-09-12  119.131790
+..         ...         ...
+117 2025-02-26  131.279999
+118 2025-02-27  120.150002
+119 2025-02-28  124.919998
+120 2025-03-03  114.059998
+121 2025-03-04  115.989998
+
+[122 rows x 2 columns]}
+[2025-03-05T04:49:55.630+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-03-05T04:49:55.631+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=forecast_stock_prices, task_id=fetch_data_from_snowflake, run_id=manual__2025-03-05T04:49:20.785675+00:00, execution_date=20250305T044920, start_date=20250305T044934, end_date=20250305T044955
+[2025-03-05T04:49:56.735+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-03-05T04:49:56.761+0000] {taskinstance.py:3900} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-03-05T04:49:56.764+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

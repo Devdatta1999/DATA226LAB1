@@ -1,0 +1,166 @@
+[2025-03-05T03:12:23.536+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-03-05T03:12:23.680+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: extract_stock_data.load_to_snowflake manual__2025-03-05T03:12:02.782153+00:00 [queued]>
+[2025-03-05T03:12:23.726+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: extract_stock_data.load_to_snowflake manual__2025-03-05T03:12:02.782153+00:00 [queued]>
+[2025-03-05T03:12:23.732+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-03-05T03:12:23.799+0000] {taskinstance.py:2888} INFO - Executing <Task(_PythonDecoratedOperator): load_to_snowflake> on 2025-03-05 03:12:02.782153+00:00
+[2025-03-05T03:12:23.844+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=786) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-03-05T03:12:23.852+0000] {standard_task_runner.py:72} INFO - Started process 792 to run task
+[2025-03-05T03:12:23.851+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'extract_stock_data', 'load_to_snowflake', 'manual__2025-03-05T03:12:02.782153+00:00', '--job-id', '33', '--raw', '--subdir', 'DAGS_FOLDER/extract_stock_data.py', '--cfg-path', '/tmp/tmp0rkimdy3']
+[2025-03-05T03:12:23.865+0000] {standard_task_runner.py:105} INFO - Job 33: Subtask load_to_snowflake
+[2025-03-05T03:12:24.221+0000] {task_command.py:467} INFO - Running <TaskInstance: extract_stock_data.load_to_snowflake manual__2025-03-05T03:12:02.782153+00:00 [running]> on host ed517ed82b96
+[2025-03-05T03:12:25.042+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='extract_stock_data' AIRFLOW_CTX_TASK_ID='load_to_snowflake' AIRFLOW_CTX_EXECUTION_DATE='2025-03-05T03:12:02.782153+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-03-05T03:12:02.782153+00:00'
+[2025-03-05T03:12:25.122+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-03-05T03:12:25.210+0000] {base.py:84} INFO - Retrieving connection 'snowflake_conn'
+[2025-03-05T03:12:25.241+0000] {connection.py:413} INFO - Snowflake Connector for Python Version: 3.12.1, Python Version: 3.12.5, Platform: Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36
+[2025-03-05T03:12:25.244+0000] {connection.py:1196} INFO - Connecting to GLOBAL Snowflake domain
+[2025-03-05T03:12:25.250+0000] {connection.py:1277} INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+[2025-03-05T03:12:27.632+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-03-05T03:12:27.877+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-03-05T03:12:27.893+0000] {base.py:84} INFO - Retrieving connection 'snowflake_conn'
+[2025-03-05T03:12:27.894+0000] {connection.py:413} INFO - Snowflake Connector for Python Version: 3.12.1, Python Version: 3.12.5, Platform: Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36
+[2025-03-05T03:12:27.896+0000] {connection.py:1196} INFO - Connecting to GLOBAL Snowflake domain
+[2025-03-05T03:12:27.897+0000] {connection.py:1277} INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+[2025-03-05T03:12:28.432+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-03-05T03:12:28.433+0000] {sql.py:509} INFO - Running statement: PUT 'file:///tmp/AAPL_data.csv' @dev.raw.stock_stage/AAPL_data.csv AUTO_COMPRESS=TRUE OVERWRITE=TRUE, parameters: None
+[2025-03-05T03:12:29.475+0000] {sql.py:518} INFO - Rows affected: 1
+[2025-03-05T03:12:29.476+0000] {snowflake.py:422} INFO - Rows affected: 1
+[2025-03-05T03:12:29.477+0000] {snowflake.py:423} INFO - Snowflake query id: 01bacbc0-0004-af8a-0004-e3c30007020e
+[2025-03-05T03:12:29.549+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-03-05T03:12:29.550+0000] {connection.py:788} INFO - closed
+[2025-03-05T03:12:29.594+0000] {connection.py:794} INFO - No async queries seem to be running, deleting session
+[2025-03-05T03:12:30.751+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-03-05T03:12:30.753+0000] {connection.py:413} INFO - Snowflake Connector for Python Version: 3.12.1, Python Version: 3.12.5, Platform: Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36
+[2025-03-05T03:12:30.755+0000] {connection.py:1196} INFO - Connecting to GLOBAL Snowflake domain
+[2025-03-05T03:12:30.756+0000] {connection.py:1277} INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+[2025-03-05T03:12:31.279+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-03-05T03:12:31.280+0000] {sql.py:509} INFO - Running statement: PUT 'file:///tmp/NVDA_data.csv' @dev.raw.stock_stage/NVDA_data.csv AUTO_COMPRESS=TRUE OVERWRITE=TRUE, parameters: None
+[2025-03-05T03:12:31.736+0000] {sql.py:518} INFO - Rows affected: 1
+[2025-03-05T03:12:31.825+0000] {snowflake.py:422} INFO - Rows affected: 1
+[2025-03-05T03:12:31.826+0000] {snowflake.py:423} INFO - Snowflake query id: 01bacbc0-0004-af8a-0004-e3c300070216
+[2025-03-05T03:12:31.924+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-03-05T03:12:31.925+0000] {connection.py:788} INFO - closed
+[2025-03-05T03:12:31.965+0000] {connection.py:794} INFO - No async queries seem to be running, deleting session
+[2025-03-05T03:12:34.035+0000] {cursor.py:1156} INFO - Number of results in first chunk: 1
+[2025-03-05T03:12:34.036+0000] {logging_mixin.py:190} INFO - Error loading data to Snowflake: 002031 (42601): None: SQL compilation error:
+Unsupported subquery type cannot be evaluated
+[2025-03-05T03:12:34.037+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/decorators/base.py", line 266, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/extract_stock_data.py", line 77, in load_to_snowflake
+    cur.execute(delete_sql)
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/cursor.py", line 1087, in execute
+    Error.errorhandler_wrapper(self.connection, self, error_class, errvalue)
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/errors.py", line 284, in errorhandler_wrapper
+    handed_over = Error.hand_to_other_handler(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/errors.py", line 339, in hand_to_other_handler
+    cursor.errorhandler(connection, cursor, error_class, error_value)
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/errors.py", line 215, in default_errorhandler
+    raise error_class(
+snowflake.connector.errors.ProgrammingError: 002031 (42601): None: SQL compilation error:
+Unsupported subquery type cannot be evaluated
+[2025-03-05T03:12:34.048+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=extract_stock_data, task_id=load_to_snowflake, run_id=manual__2025-03-05T03:12:02.782153+00:00, execution_date=20250305T031202, start_date=20250305T031223, end_date=20250305T031234
+[2025-03-05T03:12:34.062+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-03-05T03:12:34.063+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 33 for task load_to_snowflake (002031 (42601): None: SQL compilation error:
+Unsupported subquery type cannot be evaluated; 792)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/decorators/base.py", line 266, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/extract_stock_data.py", line 77, in load_to_snowflake
+    cur.execute(delete_sql)
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/cursor.py", line 1087, in execute
+    Error.errorhandler_wrapper(self.connection, self, error_class, errvalue)
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/errors.py", line 284, in errorhandler_wrapper
+    handed_over = Error.hand_to_other_handler(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/errors.py", line 339, in hand_to_other_handler
+    cursor.errorhandler(connection, cursor, error_class, error_value)
+  File "/home/airflow/.local/lib/python3.12/site-packages/snowflake/connector/errors.py", line 215, in default_errorhandler
+    raise error_class(
+snowflake.connector.errors.ProgrammingError: 002031 (42601): None: SQL compilation error:
+Unsupported subquery type cannot be evaluated
+[2025-03-05T03:12:34.092+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-03-05T03:12:34.121+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
