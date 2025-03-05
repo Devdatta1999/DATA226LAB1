@@ -5,13 +5,14 @@ from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
+from airflow.models import Variable 
 
 # Constants
 SNOWFLAKE_TABLE = "dev.raw.market_data"
 FORECAST_TABLE = "dev.raw.forecasted_prices"
 FINAL_TABLE = "dev.raw.final_market_data"
-STOCKS = ["AAPL", "NVDA"]
-FORECAST_DAYS = 7
+STOCKS = Variable.get("stock_list", deserialize_json=True) #["GOOGL", "TSLA"]
+FORECAST_DAYS = int(Variable.get("forecast_days", default_var=7)) #7
 
 def return_snowflake_conn():
     """Initialize Snowflake connection using Airflow Hook"""
@@ -109,11 +110,23 @@ def merge_forecast_into_final_table():
         cur.execute("ROLLBACK;")
         print(f"Error merging data into final table: {e}")
         raise
-
+"""
 with DAG(
     dag_id='forecast_stock_prices',
     start_date=datetime(2025, 2, 21),
     schedule_interval='0 10 * * *',  # Runs daily at 10 AM after ETL DAG
+    catchup=False,
+    tags=['Forecasting', 'Stock'],
+) as dag:
+    
+    stock_data = fetch_data_from_snowflake()
+    predictions = train_and_forecast(stock_data)
+    store_forecast_in_snowflake(predictions) >> merge_forecast_into_final_table()
+"""
+with DAG(
+    dag_id='forecast_stock_prices',
+    start_date=datetime(2025, 2, 21),
+    schedule_interval=None,  # Runs only when triggered
     catchup=False,
     tags=['Forecasting', 'Stock'],
 ) as dag:

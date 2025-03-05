@@ -5,10 +5,12 @@ from datetime import datetime, timedelta
 import yfinance as yf
 import pandas as pd
 import os
+from airflow.operators.trigger_dagrun import TriggerDagRunOperator #teja
+from airflow.models import Variable 
 
 # Define constants
-STOCKS = ["AAPL", "NVDA"]
-DAYS_HISTORY = 180
+STOCKS = Variable.get("stock_list", deserialize_json=True) #["GOOGL", "TSLA"]
+DAYS_HISTORY = int(Variable.get("days_history", default_var=180)) #180
 SNOWFLAKE_TABLE = "dev.raw.market_data"
 TEMP_DIR = "/tmp/"
 SNOWFLAKE_STAGE = "dev.raw.stock_stage"
@@ -111,7 +113,7 @@ def load_to_snowflake(file_paths):
         raise
 
 
-
+"""
 
 with DAG(
     dag_id='extract_stock_data',
@@ -122,3 +124,23 @@ with DAG(
 ) as dag:
     stock_files = fetch_stock_data()
     load_to_snowflake(stock_files)
+
+"""
+#teja
+with DAG(
+    dag_id='extract_stock_data',
+    start_date=datetime(2025, 2, 21),
+    schedule_interval='0 9 * * *',  # Daily at 9 AM
+    catchup=False,
+    tags=['ETL', 'Stock'],
+) as dag:
+    stock_files = fetch_stock_data()
+    load_task = load_to_snowflake(stock_files)
+    
+    trigger_forecast = TriggerDagRunOperator(
+        task_id="trigger_forecast_stock_prices",
+        trigger_dag_id="forecast_stock_prices",  # Ensure this matches the other DAG name
+        wait_for_completion=False,
+    )
+    
+    load_task >> trigger_forecast
