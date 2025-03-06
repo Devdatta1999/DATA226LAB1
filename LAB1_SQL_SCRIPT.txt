@@ -1,0 +1,32 @@
+CREATE OR REPLACE TABLE dev.raw.market_data (
+    SYMBOL STRING,    
+    DATE DATE,        
+    OPEN FLOAT,       
+    HIGH FLOAT,       
+    LOW FLOAT,        
+    CLOSE FLOAT,      
+    VOLUME FLOAT,
+    PRIMARY KEY (symbol, date)       
+);
+
+
+
+CREATE OR REPLACE TABLE dev.raw.forecasted_prices (
+    symbol STRING,
+    date DATE,
+    predicted_close FLOAT,
+    PRIMARY KEY (symbol, date)       
+    
+);
+
+
+CREATE OR REPLACE TABLE dev.raw.final_market_data AS 
+SELECT * FROM dev.raw.market_data;  
+
+SELECT * FROM raw.market_data
+
+SELECT * FROM raw.forecasted_prices
+
+SELECT * FROM raw.final_market_data
+
+
